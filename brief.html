@@ -1,0 +1,187 @@
+<title>Throughline Brief</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: one calm column that reads top to bottom like a conversation. */
+:root {
+  --bg: #f3f6f7; --surface: #ffffff; --surface-2: #e9f0f2; --ink: #0e1c22; --ink-2: #44565e; --line: #d3dde1;
+  --accent: #0a6b72; --accent-ink: #ffffff; --accent-soft: #d8ecec; --warn: #a24a24; --warn-soft: #fbe6dc; --good: #0a6e0a; --good-soft: #e0f3df;
+  --font-display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --font-body: "IBM Plex Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0c1316; --surface: #131c20; --surface-2: #1a262c; --ink: #e5eef0; --ink-2: #a9b9bf; --line: #26363d;
+  --accent: #43b8bb; --accent-ink: #03191b; --accent-soft: #123538; --warn: #f0a07f; --warn-soft: #3a2116; --good: #5fd35f; --good-soft: #10301a; color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --bg: #0c1316; --surface: #131c20; --surface-2: #1a262c; --ink: #e5eef0; --ink-2: #a9b9bf; --line: #26363d;
+  --accent: #43b8bb; --accent-ink: #03191b; --accent-soft: #123538; --warn: #f0a07f; --warn-soft: #3a2116; --good: #5fd35f; --good-soft: #10301a; color-scheme: dark; }
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 16px; line-height: 1.55; }
+.wrap { max-width: 980px; margin: 0 auto; padding-block: 40px 56px; padding-left: max(20px, env(safe-area-inset-left, 0px)); padding-right: max(20px, env(safe-area-inset-right, 0px)); display: flex; flex-direction: column; gap: 44px; }
+h1, h2, h3 { font-family: var(--font-display); margin: 0; line-height: 1.15; text-wrap: balance; }
+h1 { font-size: clamp(2rem, 5vw, 3rem); letter-spacing: -0.02em; }
+h2 { font-size: 1.5rem; }
+h3 { font-size: 1.1rem; }
+p { margin: 0; }
+.eyebrow { font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); font-weight: 600; }
+.lead { font-size: 1.15rem; color: var(--ink-2); max-width: 62ch; }
+.head { display: flex; flex-direction: column; gap: 14px; }
+section { display: flex; flex-direction: column; gap: 18px; }
+.sub { color: var(--ink-2); max-width: 64ch; }
+.grid { display: grid; gap: 14px; }
+.g4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.g3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 18px; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.step-n { width: 30px; height: 30px; border-radius: 50%; background: var(--accent); color: var(--accent-ink); display: grid; place-items: center; font-weight: 600; font-size: 0.9rem; }
+.card p { color: var(--ink-2); font-size: 0.95rem; }
+.example { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 22px; display: flex; flex-direction: column; gap: 18px; }
+.toggle { display: inline-flex; background: var(--surface-2); border-radius: 10px; padding: 4px; gap: 4px; align-self: flex-start; }
+.toggle button { font: inherit; font-weight: 600; font-size: 0.95rem; border: 0; background: transparent; color: var(--ink-2); padding: 8px 18px; border-radius: 7px; cursor: pointer; }
+.toggle button[aria-pressed="true"] { background: var(--surface); color: var(--ink); box-shadow: 0 1px 3px rgba(0,0,0,0.12); }
+.toggle button:focus-visible, .chip:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.flow { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; counter-reset: s; }
+.box { border-radius: 10px; padding: 12px; font-size: 0.92rem; background: var(--surface-2); border: 1px solid var(--line); position: relative; min-width: 0; }
+.box b { display: block; margin-bottom: 2px; }
+.box span { color: var(--ink-2); }
+.box.bad { background: var(--warn-soft); border-color: transparent; }
+.box.bad b::before { content: "▲ "; color: var(--warn); font-size: 0.8em; }
+.box.good { background: var(--good-soft); border-color: transparent; }
+.box.good b::before { content: "● "; color: var(--good); font-size: 0.8em; }
+.box:not(:last-child)::after { content: "→"; position: absolute; right: -9px; top: 50%; transform: translateY(-50%); color: var(--ink-2); font-size: 0.9rem; }
+.verdict { padding: 12px 14px; border-radius: 10px; font-weight: 500; }
+.verdict.bad { background: var(--warn-soft); }
+.verdict.good { background: var(--good-soft); }
+.two { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+ul { margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 6px; color: var(--ink-2); }
+li::marker { color: var(--accent); }
+.guard { font-size: 0.88rem; color: var(--ink); background: var(--accent-soft); border-radius: 8px; padding: 8px 10px; }
+.guard::before { content: "Person in charge: "; font-weight: 600; }
+.phase { font-size: 0.8rem; font-weight: 600; color: var(--accent); letter-spacing: 0.04em; text-transform: uppercase; }
+.promise { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 24px; }
+.promise div { padding-left: 14px; border-left: 3px solid var(--accent); }
+.promise b { display: block; }
+.promise span { color: var(--ink-2); font-size: 0.95rem; }
+.note { font-size: 0.85rem; color: var(--ink-2); border-top: 1px solid var(--line); padding-top: 16px; }
+@media (max-width: 820px) {
+  .g4, .g3, .two, .promise { grid-template-columns: minmax(0, 1fr); }
+  .flow { grid-template-columns: minmax(0, 1fr); }
+  .box:not(:last-child)::after { content: "↓"; right: auto; left: 50%; top: auto; bottom: -15px; transform: translateX(-50%); }
+  .flow { gap: 18px; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<main class="wrap">
+  <header class="head">
+    <div class="eyebrow">Business Operations &amp; AI Transformation Lead · how I would work</div>
+    <h1>Find what slows the team down. Fix it simply. Prove it worked.</h1>
+    <p class="lead">A short picture of how I would approach this role: one repeatable method, one worked example from your world, and what my first 90 days would look like.</p>
+  </header>
+
+  <section aria-labelledby="s1">
+    <h2 id="s1">My approach, every time</h2>
+    <div class="grid g4">
+      <div class="card"><div class="step-n">1</div><h3>Listen</h3><p>Sit with the people doing the work: schedulers, call center agents, clinicians, finance. Ask what slows them down.</p></div>
+      <div class="card"><div class="step-n">2</div><h3>Map</h3><p>Draw how the work actually flows today, and find where it waits, gets redone, or falls through the cracks.</p></div>
+      <div class="card"><div class="step-n">3</div><h3>Fix</h3><p>Pick the smallest change that works: a process tweak, an automation, or AI with a person checking the output.</p></div>
+      <div class="card"><div class="step-n">4</div><h3>Measure</h3><p>Agree on the number before we start, then compare a pilot team against a team that didn't change.</p></div>
+    </div>
+  </section>
+
+  <section aria-labelledby="s2">
+    <h2 id="s2">One example, start to finish: members missing their visits</h2>
+    <p class="sub">A common problem for a company that schedules visits for health plan members. This is an illustration, not your data.</p>
+    <div class="example">
+      <div class="toggle" role="group" aria-label="Show the process">
+        <button type="button" id="btn-today" aria-pressed="true">Today</button>
+        <button type="button" id="btn-after" aria-pressed="false">After the fix</button>
+      </div>
+
+      <div id="flow-today" class="flow" aria-label="Today's process">
+        <div class="box"><b>Visit booked</b><span>Scheduler books the member by phone.</span></div>
+        <div class="box"><b>One-way text</b><span>A reminder goes out. The member can't reply.</span></div>
+        <div class="box bad"><b>No follow-up</b><span>Nobody knows who is actually coming.</span></div>
+        <div class="box bad"><b>Member forgets</b><span>Or can't make it, and has no easy way to say so.</span></div>
+        <div class="box bad"><b>Empty slot</b><span>The clinician shows up or waits. That time is lost.</span></div>
+      </div>
+      <div id="flow-after" class="flow" aria-label="Process after the fix" hidden>
+        <div class="box"><b>Visit booked</b><span>Same as today.</span></div>
+        <div class="box good"><b>Two-way text</b><span>"Reply 1 to confirm, 2 to reschedule."</span></div>
+        <div class="box good"><b>No reply? A call</b><span>AI flags who is most likely to miss; a scheduler calls them first.</span></div>
+        <div class="box good"><b>Easy reschedule</b><span>Rebook on the spot, and offer the open slot to a waitlist.</span></div>
+        <div class="box good"><b>Full day</b><span>The clinician sees a confirmed schedule.</span></div>
+      </div>
+      <p id="verdict-today" class="verdict bad">Where it breaks: after the reminder goes out, nobody owns the follow-up.</p>
+      <p id="verdict-after" class="verdict good" hidden>What changed: every visit gets confirmed, and the people most likely to miss get a human call. The scheduling system stays the same.</p>
+
+      <div class="two">
+        <div class="card">
+          <h3>What I would ask first</h3>
+          <ul>
+            <li>Out of every 10 booked visits, how many don't happen?</li>
+            <li>Who finds out first when a member can't make it?</li>
+            <li>What happens to that open slot today?</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>How I would prove it worked</h3>
+          <ul>
+            <li>Run it in one market for six weeks; keep a similar market as the comparison.</li>
+            <li>Track one number: the share of booked visits that actually happen.</li>
+            <li>Illustration: going from 1 in 5 visits missed to 1 in 8 means more members seen by the same clinicians.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="s3">
+    <h2 id="s3">Where AI helps, with a person in charge</h2>
+    <p class="sub">I use AI for the repetitive parts of the work and keep people on the decisions. Member privacy comes first: only vendors with a signed BAA, only the information the task needs, and a record of what the AI did.</p>
+    <div class="grid g3">
+      <div class="card"><h3>Call notes</h3><p>After each call, AI drafts the note and the next step. The agent reviews it in one click, so less time goes to typing after every call.</p><p class="guard">anything health-related or urgent always goes to a nurse, never automated.</p></div>
+      <div class="card"><h3>Reminders and follow-up</h3><p>Automation sends confirmations and lists the members who didn't reply, so schedulers spend their time on calls that matter.</p><p class="guard">schedulers decide who to call and how to help.</p></div>
+      <div class="card"><h3>Weekly reporting</h3><p>A dashboard updates itself instead of someone rebuilding a spreadsheet every Monday. Managers start the week from what is off track.</p><p class="guard">each team agrees on what the numbers mean.</p></div>
+    </div>
+  </section>
+
+  <section aria-labelledby="s4">
+    <h2 id="s4">My first 90 days</h2>
+    <div class="grid g3">
+      <div class="card"><div class="phase">Days 1–30 · Learn</div><ul><li>Meet every department lead and their frontline team</li><li>Shadow scheduling, the call center, and chart review</li><li>Agree on the handful of numbers that matter most</li><li>Build a ranked list of the biggest pain points</li></ul></div>
+      <div class="card"><div class="phase">Days 31–60 · First wins</div><ul><li>Ship two small fixes that teams feel right away</li><li>Start one AI pilot alongside the current process, checked by people</li><li>Send a short weekly update on what changed</li></ul></div>
+      <div class="card"><div class="phase">Days 61–90 · Prove it</div><ul><li>Compare the pilot against the comparison group</li><li>Train teams with a simple one-page guide</li><li>Decide together: expand it, adjust it, or stop it</li><li>Set the next set of priorities</li></ul></div>
+    </div>
+  </section>
+
+  <section aria-labelledby="s5">
+    <h2 id="s5">What you can count on from me</h2>
+    <div class="promise">
+      <div><b>I go to the floor before the spreadsheet.</b><span>The people doing the work know where it breaks.</span></div>
+      <div><b>I start small and move fast.</b><span>A fix live in two weeks beats a perfect plan in two months.</span></div>
+      <div><b>I measure before and after.</b><span>If we can't show it helped, we don't call it a win.</span></div>
+      <div><b>I bring people along.</b><span>A tool nobody uses didn't fix anything. Adoption is the job.</span></div>
+    </div>
+  </section>
+
+  <p class="note">Built with Claude Code as an example of the AI-assisted tools I use day to day. The scenario is illustrative; there is no real member or company data on this page.</p>
+</main>
+
+<script>
+(function () {
+  var t = document.getElementById("btn-today"), a = document.getElementById("btn-after");
+  function show(after) {
+    t.setAttribute("aria-pressed", String(!after));
+    a.setAttribute("aria-pressed", String(after));
+    document.getElementById("flow-today").hidden = after;
+    document.getElementById("verdict-today").hidden = after;
+    document.getElementById("flow-after").hidden = !after;
+    document.getElementById("verdict-after").hidden = !after;
+  }
+  t.addEventListener("click", function () { show(false); });
+  a.addEventListener("click", function () { show(true); });
+})();
+</script>
