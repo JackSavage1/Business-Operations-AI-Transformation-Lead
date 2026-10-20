@@ -71,7 +71,7 @@
         design: "Randomize high-risk appointments in Phoenix and Charlotte 50/50 for 6 weeks: two-way SMS plus a live confirm call vs today's reminders.",
         guard: "SMS opt-out rate, member complaints, same-day cancellations", bar: "+3 pts show rate vs holdout" }; }
 
-    P["OPP-02"] = { unit: "member calls that need a note", v: v({ volume: 21000, minutes: 1.6, adoption: 75, ramp: 3, build: 22000, run: 1600 }),
+    P["OPP-02"] = { unit: "member calls that need a note", v: v({ volume: 16500, minutes: 1.2, adoption: 75, ramp: 3, build: 22000, run: 1600 }),
       notes: { volume: "Connected outbound plus inbound conversations per month that need a note and a disposition.", minutes: `ACW averages ${UI.fmt.mmss(b.acwPost)} since the W14 scheduling change, up from ${UI.fmt.mmss(b.acwPre)}. The AI draft removes most of the typing; the agent still reviews and confirms.` },
       how: { minutes: "Compare ACW in dialer logs for pilot vs control agents; spot-check 50 AI-drafted notes for accuracy.", adoption: "Share of calls where the agent accepts the draft (edited or not), from the CRM audit log." },
       design: "Pilot with 6 agents on the English outreach team for 4 weeks; a control group matched on tenure and queue keeps the current workflow.",

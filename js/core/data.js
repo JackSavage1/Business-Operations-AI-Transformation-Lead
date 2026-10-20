@@ -332,7 +332,7 @@
     { id: "OPP-02", title: "AI call-note summarization and disposition coding", dept: "Call center", stage: "Prototype",
       problem: "Agents spend 2+ min of after-call work per call writing notes and choosing dispositions; quality varies.",
       solution: "LLM drafts the note and disposition from agent bullets or transcript; agent confirms in one click; low-confidence cases route to QA.",
-      kpi: "After-call work (sec)", impact: 4, confidence: 4, effort: 3, risk: "High", hoursSavedPerMonth: 310, revenueImpactAnnual: 0, owner: "Call center manager", tools: ["Claude (BAA)", "CRM", "n8n"], source: "seed" },
+      kpi: "After-call work (sec)", impact: 4, confidence: 4, effort: 3, risk: "High", hoursSavedPerMonth: 250, revenueImpactAnnual: 0, owner: "Call center manager", tools: ["Claude (BAA)", "CRM", "n8n"], source: "seed" },
     { id: "OPP-03", title: "Route Spanish-preferred members to bilingual schedulers", dept: "Call center", stage: "Discovery",
       problem: "Houston reached→scheduled conversion trails the network by ~12 points; Spanish-preferred members often get callbacks that never happen.",
       solution: "Use plan language preference + first-call flag to route directly to the bilingual queue; track callback SLA.",

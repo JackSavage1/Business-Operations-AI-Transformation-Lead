@@ -1272,7 +1272,7 @@
       <section class="panel" aria-labelledby="al-h-gov">
         <div class="panel-head"><div><h2 id="al-h-gov">8 · Governance and rollout</h2><p class="panel-sub">The guardrails and the exit criteria that let each phase start.</p></div></div>
         <div id="al-gov"></div>
-        <div class="presenter-note">In week one I would put this in shadow mode on two weeks of real wrap-ups, have QA double-label 300 notes, and bring these exact numbers to the call-center manager before a single disposition is written back.</div>
+        <div class="presenter-note">Once the BAA and privacy review clear, I would run this in shadow mode on two weeks of real wrap-ups, have QA double-label 300 notes, and bring these exact numbers to the call-center manager before a single disposition is written back.</div>
       </section>
 
       <section class="panel" aria-labelledby="al-h-more">

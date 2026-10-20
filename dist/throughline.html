@@ -1003,7 +1003,7 @@ pre.code.wrap { white-space: pre-wrap; word-break: break-word; }
     { id: "OPP-02", title: "AI call-note summarization and disposition coding", dept: "Call center", stage: "Prototype",
       problem: "Agents spend 2+ min of after-call work per call writing notes and choosing dispositions; quality varies.",
       solution: "LLM drafts the note and disposition from agent bullets or transcript; agent confirms in one click; low-confidence cases route to QA.",
-      kpi: "After-call work (sec)", impact: 4, confidence: 4, effort: 3, risk: "High", hoursSavedPerMonth: 310, revenueImpactAnnual: 0, owner: "Call center manager", tools: ["Claude (BAA)", "CRM", "n8n"], source: "seed" },
+      kpi: "After-call work (sec)", impact: 4, confidence: 4, effort: 3, risk: "High", hoursSavedPerMonth: 250, revenueImpactAnnual: 0, owner: "Call center manager", tools: ["Claude (BAA)", "CRM", "n8n"], source: "seed" },
     { id: "OPP-03", title: "Route Spanish-preferred members to bilingual schedulers", dept: "Call center", stage: "Discovery",
       problem: "Houston reached→scheduled conversion trails the network by ~12 points; Spanish-preferred members often get callbacks that never happen.",
       solution: "Use plan language preference + first-call flag to route directly to the bilingual queue; track callback SLA.",
@@ -1944,7 +1944,7 @@ pre.code.wrap { white-space: pre-wrap; word-break: break-word; }
 
   function demoSteps() {
     return [
-      { t: "0:00", page: "home", click: "Read the thesis, then scroll to the five findings.", say: "Every number here is computed from the data, not typed in. Move the slider to 50% to size the prize." },
+      { t: "0:00", page: "home", click: "Read the thesis, then scroll to the five findings.", say: "Every number here is computed from the data, not typed in. The slider sizes the prize; it starts at half of each gap closed." },
       { t: "0:45", page: "dashboard", click: "Filter to Houston, then look at the call center trend.", say: "The reached-to-scheduled gap and the after-call-work step are visible in one place." },
       { t: "1:45", page: "discovery", click: "Open the Outreach & call center tab, then promote the bilingual callback pain point.", say: "This is how I would spend my first weeks: sharp questions, shadowing, and a log that feeds the backlog." },
       { t: "2:45", page: "pipeline", params: { opp: "OPP-03" }, click: "Find the promoted item next to OPP-03 and compare scores.", say: "One backlog, scored on impact, confidence, effort and PHI risk." },
@@ -7358,7 +7358,7 @@ ${bullets.map((x) => "- " + x.lead + ": " + x.text).join("\n")}`;
               <button type="button" class="btn primary" id="pl-add">${UI.icon("plus")} Add opportunity</button>
             </div>
           </div>
-          <div class="presenter-note">Top-left is where I start: high impact, low effort. Bilingual routing in Houston ranks first because the data already shows a 10-point conversion gap and the fix is a dialer rule. Switch to Board and I move cards as work progresses; nothing reaches Measured without a before/after number.</div>
+          <div class="presenter-note">Top-left is where I start: high impact, low effort. Bilingual routing in Houston ranks first because the data already shows a 12-point conversion gap and the fix is a dialer rule. Switch to Board and I move cards as work progresses; nothing reaches Measured without a before/after number.</div>
           <div id="pl-view" class="stack" style="gap:12px"></div>
           <div class="pl-foot">
             <p class="xs muted pl-method">Score = (impact × confidence) ÷ effort, 1 to 5 scales; High PHI/compliance risk takes a 15% haircut. Annual value = hours saved per month × 12 × $${RATE} loaded rate + annual revenue impact. Edits save in this browser and feed the ROI model.</p>
@@ -7460,7 +7460,7 @@ ${bullets.map((x) => "- " + x.lead + ": " + x.text).join("\n")}`;
         design: "Randomize high-risk appointments in Phoenix and Charlotte 50/50 for 6 weeks: two-way SMS plus a live confirm call vs today's reminders.",
         guard: "SMS opt-out rate, member complaints, same-day cancellations", bar: "+3 pts show rate vs holdout" }; }
 
-    P["OPP-02"] = { unit: "member calls that need a note", v: v({ volume: 21000, minutes: 1.6, adoption: 75, ramp: 3, build: 22000, run: 1600 }),
+    P["OPP-02"] = { unit: "member calls that need a note", v: v({ volume: 16500, minutes: 1.2, adoption: 75, ramp: 3, build: 22000, run: 1600 }),
       notes: { volume: "Connected outbound plus inbound conversations per month that need a note and a disposition.", minutes: `ACW averages ${UI.fmt.mmss(b.acwPost)} since the W14 scheduling change, up from ${UI.fmt.mmss(b.acwPre)}. The AI draft removes most of the typing; the agent still reviews and confirms.` },
       how: { minutes: "Compare ACW in dialer logs for pilot vs control agents; spot-check 50 AI-drafted notes for accuracy.", adoption: "Share of calls where the agent accepts the draft (edited or not), from the CRM audit log." },
       design: "Pilot with 6 agents on the English outreach team for 4 weeks; a control group matched on tenure and queue keeps the current workflow.",
@@ -9424,7 +9424,7 @@ ${bullets.map((x) => "- " + x.lead + ": " + x.text).join("\n")}`;
       <section class="panel" aria-labelledby="al-h-gov">
         <div class="panel-head"><div><h2 id="al-h-gov">8 · Governance and rollout</h2><p class="panel-sub">The guardrails and the exit criteria that let each phase start.</p></div></div>
         <div id="al-gov"></div>
-        <div class="presenter-note">In week one I would put this in shadow mode on two weeks of real wrap-ups, have QA double-label 300 notes, and bring these exact numbers to the call-center manager before a single disposition is written back.</div>
+        <div class="presenter-note">Once the BAA and privacy review clear, I would run this in shadow mode on two weeks of real wrap-ups, have QA double-label 300 notes, and bring these exact numbers to the call-center manager before a single disposition is written back.</div>
       </section>
 
       <section class="panel" aria-labelledby="al-h-more">

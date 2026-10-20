@@ -180,7 +180,7 @@
 
   function demoSteps() {
     return [
-      { t: "0:00", page: "home", click: "Read the thesis, then scroll to the five findings.", say: "Every number here is computed from the data, not typed in. Move the slider to 50% to size the prize." },
+      { t: "0:00", page: "home", click: "Read the thesis, then scroll to the five findings.", say: "Every number here is computed from the data, not typed in. The slider sizes the prize; it starts at half of each gap closed." },
       { t: "0:45", page: "dashboard", click: "Filter to Houston, then look at the call center trend.", say: "The reached-to-scheduled gap and the after-call-work step are visible in one place." },
       { t: "1:45", page: "discovery", click: "Open the Outreach & call center tab, then promote the bilingual callback pain point.", say: "This is how I would spend my first weeks: sharp questions, shadowing, and a log that feeds the backlog." },
       { t: "2:45", page: "pipeline", params: { opp: "OPP-03" }, click: "Find the promoted item next to OPP-03 and compare scores.", say: "One backlog, scored on impact, confidence, effort and PHI risk." },

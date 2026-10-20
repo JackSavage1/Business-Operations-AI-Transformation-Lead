@@ -843,7 +843,7 @@
               <button type="button" class="btn primary" id="pl-add">${UI.icon("plus")} Add opportunity</button>
             </div>
           </div>
-          <div class="presenter-note">Top-left is where I start: high impact, low effort. Bilingual routing in Houston ranks first because the data already shows a 10-point conversion gap and the fix is a dialer rule. Switch to Board and I move cards as work progresses; nothing reaches Measured without a before/after number.</div>
+          <div class="presenter-note">Top-left is where I start: high impact, low effort. Bilingual routing in Houston ranks first because the data already shows a 12-point conversion gap and the fix is a dialer rule. Switch to Board and I move cards as work progresses; nothing reaches Measured without a before/after number.</div>
           <div id="pl-view" class="stack" style="gap:12px"></div>
           <div class="pl-foot">
             <p class="xs muted pl-method">Score = (impact × confidence) ÷ effort, 1 to 5 scales; High PHI/compliance risk takes a 15% haircut. Annual value = hours saved per month × 12 × $${RATE} loaded rate + annual revenue impact. Edits save in this browser and feed the ROI model.</p>

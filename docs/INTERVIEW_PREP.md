@@ -77,47 +77,36 @@ Ranges are **rough, industry-typical figures for orientation only**. They vary w
 
 - **Offer it; don't force it.** Good openings: after your background answer, at "tell me about something you built," at "first 90 days," or at "questions for us?"
 - Offer line: "I put together a working example of how I'd approach the first few weeks here. Want a 3-minute look, or should we keep talking?" If they say later, wait.
-- Before the call: app open in its own tab, presenter notes on, other tabs closed, 3–4 backup screenshots in case screen share fails.
+- Before the call: app open in its own tab, other tabs closed, the offline file `dist/throughline.html` ready as a backup. **Presenter notes OFF while sharing**: they render on the page as "SAY" boxes, so the interviewer would see them. Rehearse with them on tonight.
 - **Talk about their business, not the app.** Every page is a prompt for "here's how I'd find this in your data." If a page differs from these notes, describe what's on screen.
 
 ### "Is this real data?"
 
-> "No. It's fully synthetic, modeled on how a business like yours works: health plans, markets, a call center, clinicians, chart QA. I built it in an evening with Claude Code to show how I'd work, not to guess at your numbers. The real version starts with your data in week one, and I'd expect your real bottlenecks to differ."
+> "No. It's fully synthetic, modeled on how a business like yours works: health plans, markets, a call center, clinicians, chart QA. I built it with Claude Code, directing several AI agents against one spec I wrote, to show how I'd work, not to guess at your numbers. The real version starts with your data in week one, and I'd expect your real bottlenecks to differ."
 
 If they ask how you built it: you directed an AI coding tool, made the design calls (what to measure, which guardrails, how to validate), and reviewed the output. That is the JD's "prototype lightweight solutions using AI-assisted development tools." Be ready to explain every method on screen yourself (see "Know it cold").
 
-### The 3-minute version
+### The walkthrough
 
-| Time | Page | What to say |
-|---|---|---|
-| 0:00–0:45 | **Ops Command Center** | "This is the funnel from roster to billed visit. Houston converts reached members to scheduled about 12 points below the network, and AHT and after-call work jump at week 14, right after a scheduling-system change." |
-| 0:45–1:30 | **Opportunity Pipeline** | "Each finding becomes a scored opportunity: impact, confidence, effort, compliance risk. Routing Spanish-preferred members to bilingual schedulers is low effort, high impact, so it goes first." |
-| 1:30–2:30 | **AI Automation Lab** | "One AI workflow end to end: a call note becomes a structured disposition. PHI is redacted before the model sees it, rules validate the output, low-confidence cases go to a human, and an eval scorecard tells me if it's ready to pilot." |
-| 2:30–3:00 | **Adoption & Impact** | "And this is how I'd prove it: pilot vs comparison group, before and after, difference-in-differences, so we don't credit the fix for a seasonal trend." Then ask: "Which of these looks most like your world?" |
+Use **[DEMO_SCRIPT.md](DEMO_SCRIPT.md)** for the click-by-click 3-minute and 7-minute versions. It is the single source of truth and was checked against the running app. The numbers to land, on default settings:
 
-### The 7-minute version
-
-| Time | Page | What to say |
-|---|---|---|
-| 0:00–0:30 | **Start here** | "This mirrors your job description: discover, prioritize, build, adopt, measure." |
-| 0:30–1:30 | **Ops Command Center** | Name the four exceptions: Houston conversion, Phoenix no-show near 22%, Tampa QA first-pass down about 10 points in 6 weeks, the W14 AHT jump. "The Monday meeting should start from exceptions, not slides." |
-| 1:30–2:00 | **Discovery Kit** | "Before I trust the data, I ask the people doing the work. These are my week-one questions for each department." |
-| 2:00–2:45 | **Workflow Mapper** | "The week-14 jump is double entry: agents key the appointment in two systems. That's a process fix before it's an AI project." |
-| 2:45–3:30 | **Pipeline → Impact & ROI** | "I size every idea in visits, hours, and dollars with the assumptions visible, so a leader can argue with an input instead of the conclusion." |
-| 3:30–4:45 | **AI Automation Lab** | "The model is the easy part. Redaction, validation, routing, and evals make it safe for agents. The n8n export is something engineering can review." |
-| 4:45–5:30 | **No-Show & Scheduling Optimizer** | "Phoenix no-shows track lead time and drive distance. Target the riskiest appointments with two-way confirmation and backfill instead of reminding everyone the same way." |
-| 5:30–6:00 | **Clinician Capacity** | "Charlotte is near 97% utilized. That's a capacity problem. Squeezing it loses clinicians; the lever is hiring and credentialing lead time." |
-| 6:00–6:20 | **SOP & Training Builder** | "Adoption needs a one-page SOP and a 10-minute training in the frontline's words." |
-| 6:20–7:00 | **Adoption & Impact** | "I track usage, overrides, and the KPI against a comparison group. If adoption stalls, I go back to the floor." End with a question. |
+| Page | The line |
+|---|---|
+| **Start here** | The loop is See → Discover → Prioritize → Build → Adopt & measure. Five findings are computed live from the data. |
+| **Ops Command Center** | Four Critical alerts: the W14 network schedule-rate drop (all six markets in the same week), Houston conversion about 12 points below the other markets, Phoenix show rate 71.0% (no-show about 22.7%), Tampa QA first-pass down about 9 points since W21. AHT/ACW after W14 is the next alert (Serious). |
+| **Workflow Mapper** | Schedulers re-key the visit request into the scheduling system since the W14 change. Double entry is the first hypothesis to test for the W14 drop, not a proven cause. |
+| **AI Automation Lab** | On 16 notes, a **simulated** extractor (not a real model's measured accuracy) gets 93.8% intent accuracy. Hard rules lift escalation recall from 80% to 100%: they catch the shortness-of-breath call the model coded as a routine confirm. |
+| **Clinician Capacity** | Charlotte is about 97% utilized. Levers (routing, backfill, AI documentation assist) buy runway, but the first requisition should open now. |
+| **SOP & Training** | Full SOP with RACI, plus a one-page quick-reference card and 15-minute role-based training modules. |
 
 Tampa, if asked: "QA first-pass dropped as new clinicians onboarded. I'd test pre-submit checks and structured templates before blaming people."
 
 ### Know it cold
 
-- **No-show model:** logistic regression giving each appointment a no-show probability from lead time, drive distance, prior no-shows, reminder confirmation. Used to target outreach, never to deny care.
+- **No-show model:** logistic regression on 20 inputs, fitted in the browser (trained W15–W22, tested W23–W26, test AUC 0.71). Biggest multipliers: prior no-show ×2.6, no reminder ×2.1, 8–10am slot ×1.7, confirmed ×0.5. Used to target outreach, never to deny or delay care.
 - **Difference-in-differences:** (pilot after − pilot before) − (comparison after − comparison before). Removes shared trends. Name the assumption: both groups trended in parallel before the change.
 - **Confidence routing:** low-confidence or rule-failing outputs go to a human queue. Tune the threshold by trading automation rate against error rate on the eval set.
-- **Eval scorecard:** per-field accuracy against hand-labeled truth. Say plainly that 16 notes is demo-sized; a real pilot needs a few hundred real calls with QA sign-off.
+- **Eval scorecard:** per-field accuracy against hand-labeled truth. The demo's extractor is a deterministic simulation; say so. 16 notes is demo-sized; a real pilot needs a few hundred real calls double-labeled by QA.
 
 ---
 
@@ -162,7 +151,7 @@ Tampa, if asked: "QA first-pass dropped as new clinicians onboarded. I'd test pr
 **6. "How do you get frontline adoption?"**
 - Two or three frontline champions shape the tool from the first prototype.
 - **The new way must take fewer clicks than the old way.**
-- Train inside the workflow: one-page SOP, 10-minute walkthrough, desk cheat sheet.
+- Train inside the workflow: SOP plus one-page quick-reference card, 15-minute role-based walkthrough, desk cheat sheet.
 - Measure usage, overrides, and workarounds; hold a weekly 15-minute feedback loop for the first month; retire the old path once stable.
 
 **7. "A department leader resists your change. What do you do?"** *(Story 3)*
@@ -210,7 +199,7 @@ Tampa, if asked: "QA first-pass dropped as new clinicians onboarded. I'd test pr
 **15. "How would you increase completed visits per clinician?"**
 - Decompose: available hours × utilization × visits per booked hour × completion rate.
 - Levers: zip-cluster routing, overbooking calibrated to no-show risk, same-day backfill, faster documentation through templates and pre-submit checks.
-- **Know when not to push:** a team at 97% (Charlotte) needs hiring and faster credentialing, not more squeeze.
+- **Know when not to push:** a team at 97% (Charlotte) needs hiring and faster credentialing. Efficiency levers buy runway; they don't replace the hire.
 
 **16. "How would you automate reconciliation?"**
 - Example: plan eligibility roster vs internal member file, or completed vs submitted vs paid visits.
@@ -277,14 +266,14 @@ Pick 4–5 for each interviewer. Write down the answers; use them in your close 
 - **Propose a first-two-weeks discovery plan.** Week 1: shadow a scheduler shift, listen to 20 calls, sit with QA, meet finance on reconciliation, get read access to funnel data. Week 2: baseline the core seven KPIs, map the top two workflows, publish a sized and ranked opportunity list, agree on the first quick win and its owner.
 - **Quote their line back:** "Your posting says success is measured by real-world business impact, not the number of analyses. I'd like my first 90 days judged that way."
 - **Raise risk unprompted:** minimum necessary, BAAs, human-in-the-loop, TCPA.
-- **Show you know when not to automate:** the double-entry fix is a process change; Charlotte needs hiring, not AI.
+- **Show you know when not to automate:** if the week-14 drop is double entry, that's an integration or process fix before it's an AI project; Charlotte needs a hire, with levers only buying time.
 - **Be precise about skill levels.** Calibrated honesty reads as low-risk.
 
 ---
 
 ## 8. Night-before checklist
 
-- [ ] Open Throughline in the browser you'll use. Click every page; check light and dark; turn on presenter notes.
+- [ ] Open Throughline in the browser you'll use. Click every page; check light and dark; rehearse with presenter notes on, then turn them off before you share your screen.
 - [ ] Rehearse the 3-minute demo aloud twice with a timer.
 - [ ] Save backup screenshots: Command Center, AI Lab, Adoption & Impact.
 - [ ] Say your pitch aloud five times; time the 2-minute background.
