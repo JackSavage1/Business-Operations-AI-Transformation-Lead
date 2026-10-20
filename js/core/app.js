@@ -189,7 +189,7 @@
       m.render(root, { data: OPS.data, q: OPS.q, opps: OPS.opps, ai: OPS.ai, ui: UI, navigate: OPS.navigate, params: params || {} });
     } catch (e) {
       console.error(e);
-      root.innerHTML = `<div class="callout critical"><strong>This page hit an error.</strong> ${UI.esc(e.message || e)}</div>`;
+      root.innerHTML = `<div class="callout critical" data-module-error><strong>This page hit an error.</strong> ${UI.esc(e.message || e)}</div>`;
     }
     if (!keepScroll) window.scrollTo(0, 0);
   }

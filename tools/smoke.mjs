@@ -64,7 +64,7 @@ for (const v of views) {
     const info = await page.evaluate(() => ({
       overflow: document.documentElement.scrollWidth - window.innerWidth,
       title: document.title,
-      moduleError: !!document.querySelector("#module-root .callout.critical strong") && document.querySelector("#module-root .callout.critical strong").textContent.includes("error"),
+      moduleError: !!document.querySelector("#module-root [data-module-error]"),
       empty: (document.getElementById("module-root") || { innerText: "" }).innerText.trim().length < 40,
       registered: window.OPS && OPS.modules ? OPS.modules().some((m) => m.id === location.hash.slice(1)) : false,
     }));
